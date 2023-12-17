@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import { Toaster } from "sonner";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { Analytics } from "@vercel/analytics/react";
 import Image from "next/image";
 
 export const metadata: Metadata = {
@@ -20,6 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <Toaster closeButton />
+      <Analytics />
       <body
         className={cn(
           GeistSans.className,

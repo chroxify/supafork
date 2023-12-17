@@ -336,7 +336,10 @@ export default function InstructionCards({
                 {migrationTree ? (
                   <div className="flex flex-col gap-2">
                     {migrationTree.tree.map((migration) => (
-                      <div className="flex flex-row items-center gap-2">
+                      <div
+                        className="flex flex-row items-center gap-2"
+                        key={migration.path}
+                      >
                         <Checkbox
                           id={migration.path}
                           checked={migrations.includes(migration.path)}
