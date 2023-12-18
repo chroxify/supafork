@@ -34,7 +34,7 @@ export default function New({
   }, [error]);
 
   return (
-    <main className="flex h-full flex-col items-center justify-center w-full p-10 lg:p-5 lg:max-w-screen-2xl">
+    <main className="flex h-full flex-col items-center justify-center w-full p-2 sm:p-5 lg:max-w-screen-2xl">
       <div className="flex flex-row items-star justify-center w-full h-full gap-5">
         {/* Info Panel */}
         <div className="hidden md:flex flex-col items-center justify-center w-1/3 min-h-max h-full">

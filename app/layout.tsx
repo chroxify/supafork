@@ -29,7 +29,7 @@ export default function RootLayout({
         )}
       >
         {/* Header */}
-        <header className="top-0 left-0 right-0 flex flex-row items-center justify-between w-full h-24 bg-background max-w-screen-2xl mx-auto px-5">
+        <header className="top-0 left-0 right-0 flex flex-row items-center justify-between w-full h-24 bg-background max-w-screen-2xl mx-auto px-2 sm:px-5">
           <Link href="/">
             <Image src="/logo.svg" alt="Logo" width={150} height={40} />
           </Link>
