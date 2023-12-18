@@ -15,6 +15,10 @@
   </p>
 </p>
 
+## Demo Video
+
+https://github.com/chroxify/supafork/assets/65873518/b11be7a0-efa1-4149-914f-8eae7807d1a0
+
 ## Introduction
 
 Supafork is an open-source project that allows you to easily fork Supabase projects. Currently there are two ways to fork a Supabase project:
@@ -22,11 +26,9 @@ Supafork is an open-source project that allows you to easily fork Supabase proje
 1. Using the Supabase CLI
 2. Using the Supabase dashboard
 
-Both of these methods have their own drawbacks. The Supabase CLI is mainly designed for developers and the Supabase dashboard requires you to manually copy and paste every single migration file. Supafork aims to solve these problems by providing a simple and easy-to-use interface for forking Supabase projects.
+Both of these methods have their own drawbacks. The Supabase CLI is mainly designed for developers, and the Supabase dashboard requires you to manually copy and paste every single migration file. Supafork aims to solve these problems by providing a simple and easy-to-use interface for forking Supabase projects.
 
-## Demo
-
-https://github.com/chroxify/supafork/assets/65873518/b11be7a0-efa1-4149-914f-8eae7807d1a0
+Supafork is inspired by [Vercel's Deploy](https://vercel.com/docs/deployments/deploy-button) button, which allows you to deploy a repository with a single click. The goal is to provide a similar experience for Supabase projects, allowing for easier setup of self-hosted apps using Supabase.
 
 ## Roadmap
 

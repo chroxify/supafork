@@ -153,7 +153,9 @@ export default function InstructionCards({
       <Card className="w-full h-full bg-card rounded-md">
         <CardHeader>
           <CardTitle>Create new Project</CardTitle>
-          <CardDescription>Create a new project to fork into</CardDescription>
+          <CardDescription>
+            Create a new Supabase project or use an already existing one.
+          </CardDescription>
         </CardHeader>
         <CardContent className="flex flex-col md:flex-row gap-4">
           <Button
@@ -186,7 +188,9 @@ export default function InstructionCards({
       <Card className="w-full h-full bg-card rounded-md">
         <CardHeader>
           <CardTitle>Connect Project</CardTitle>
-          <CardDescription>Connect a database to your project</CardDescription>
+          <CardDescription>
+            Connect your Supabase database to Supafork
+          </CardDescription>
         </CardHeader>
         <CardContent className="flex flex-col gap-4">
           <div className="flex flex-col md:flex-row gap-4 w-full">
@@ -321,7 +325,9 @@ export default function InstructionCards({
       <Card className="w-full h-full bg-card rounded-md">
         <CardHeader>
           <CardTitle>Fork Project</CardTitle>
-          <CardDescription>Fork migrations to your project</CardDescription>
+          <CardDescription>
+            Fork repository migrations to your connected Supabase project
+          </CardDescription>
         </CardHeader>
         <CardContent className="flex flex-col gap-4">
           <Accordion type="single" collapsible>
