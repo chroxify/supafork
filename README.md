@@ -26,8 +26,7 @@ Both of these methods have their own drawbacks. The Supabase CLI is mainly desig
 
 ## Demo
 
-![Supafork Demo](https://github.com/chroxify/supafork/assets/65873518/ebbc5334-95e8-483f-b98d-aa953c4d8e85)
-
+https://github.com/chroxify/supafork/assets/65873518/b11be7a0-efa1-4149-914f-8eae7807d1a0
 
 ## Roadmap
 
