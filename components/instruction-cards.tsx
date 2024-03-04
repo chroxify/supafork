@@ -24,8 +24,6 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
-  EyeClosedIcon,
-  EyeOpenIcon,
   InfoCircledIcon,
   QuestionMarkCircledIcon,
 } from "@radix-ui/react-icons";
@@ -48,21 +46,17 @@ export default function InstructionCards({
   migrationTree: MigrationTree | undefined;
 }) {
   const [isLoading, setIsLoading] = useState<"connect" | "fork" | false>(false);
-  const [showPassword, setShowPassword] = useState(false);
-  const [project, setProject] = useState<{
-    ref: string | null;
-    password: string | null;
-  }>({ ref: null, password: null });
+  const [connectionString, setConnectionString] = useState("");
   const [migrations, setMigrations] = useState<string[]>(
     migrationTree?.tree.map((migration) => migration.path) || [],
   );
 
   async function connectProject() {
-    if (!project.ref || !project.password) {
+    if (!connectionString || connectionString.includes("[YOUR-PASSWORD]")) {
       return toast.error(
-        `${
-          !project.ref ? "Project Reference ID" : "Database Password"
-        } is missing.`,
+        !connectionString
+          ? "Database connection string is missing."
+          : "Please replace [YOUR-PASSWORD] with your database password.",
       );
     }
 
@@ -75,7 +69,7 @@ export default function InstructionCards({
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        url: `postgresql://postgres:${project.password}@db.${project.ref}.supabase.co:5432/postgres`,
+        url: connectionString,
       }),
     });
 
@@ -119,7 +113,7 @@ export default function InstructionCards({
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        url: `postgresql://postgres:${project.password}@db.${project.ref}.supabase.co:5432/postgres`,
+        url: connectionString,
         migrations: migrations.map((migration) =>
           migrationsData.find((m: any) => m.path === migration),
         ),
@@ -137,7 +131,9 @@ export default function InstructionCards({
     toast.success("Successfully forked project! Redirecting to dashboard...");
 
     setTimeout(() => {
-      window.location.href = `https://supabase.com/dashboard/project/${project.ref}`;
+      window.location.href = `https://supabase.com/dashboard/project/${
+        connectionString.split("postgres.")[1].split(":")[0]
+      }`;
     }, 2500);
   }
 
@@ -196,7 +192,7 @@ export default function InstructionCards({
           <div className="flex flex-col md:flex-row gap-4 w-full">
             <div className="flex flex-col space-y-1 w-full">
               <div className="flex flex-row items-center gap-2">
-                <Label>Project Reference ID</Label>
+                <Label>Database Connection String</Label>
                 <TooltipProvider delayDuration={250}>
                   <Tooltip>
                     <TooltipTrigger>
@@ -204,8 +200,17 @@ export default function InstructionCards({
                     </TooltipTrigger>
                     <TooltipContent>
                       <>
-                        This is the reference ID of your Supabase project. (Can
-                        be found in the URL of your Supabase dashboard)
+                        The connection string to your Supabase database. You can
+                        find this in your{" "}
+                        <Link
+                          href="https://supabase.com/dashboard/project/_/settings/database"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="underline font-medium"
+                        >
+                          database settings
+                        </Link>{" "}
+                        in the Supabase dashboard.
                       </>
                     </TooltipContent>
                   </Tooltip>
@@ -213,66 +218,12 @@ export default function InstructionCards({
               </div>
               <Input
                 className="w-full"
-                placeholder="Reference ID"
+                placeholder="postgres://postgres.[ref]:[password]@[cloud]-0-[region].pooler.supabase.com:5432/postgres"
                 onChange={(e) => {
-                  setProject({ ...project, ref: e.target.value });
+                  setConnectionString(e.target.value);
                 }}
                 disabled={step !== 1}
               />
-            </div>
-            <div className="flex flex-col space-y-1 w-full">
-              <div className="flex flex-row items-center gap-2">
-                <Label>Database Password</Label>
-                <TooltipProvider delayDuration={250}>
-                  <Tooltip>
-                    <TooltipTrigger>
-                      <QuestionMarkCircledIcon className="w-4 h-4 text-foreground/60" />
-                    </TooltipTrigger>
-                    <TooltipContent>
-                      <p>
-                        This is the password you set when you created your
-                        Supabase project.
-                      </p>
-                    </TooltipContent>
-                  </Tooltip>
-                </TooltipProvider>
-              </div>
-              <div
-                className={cn(
-                  "bg-background focus-within:ring-ring ring-offset-background flex h-9 w-full rounded-md border text-sm font-extralight transition-shadow duration-200 focus-within:outline-none focus-within:ring-2 ring-offset-1",
-                  step !== 1 && "opacity-50",
-                )}
-              >
-                <Input
-                  type={showPassword ? "text" : "password"}
-                  className={cn(
-                    "h-full w-full border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 disabled:opacity-100",
-                    !showPassword &&
-                      project.password?.length &&
-                      "font-black tracking-[0.12rem]",
-                  )}
-                  placeholder="Database Password"
-                  onChange={(e) => {
-                    setProject({ ...project, password: e.target.value });
-                  }}
-                  disabled={step !== 1}
-                />
-                <div
-                  className={cn(
-                    "flex items-center justify-center text-foreground/50 select-none rounded-r-md px-3 py-2 cursor-pointer",
-                    step !== 1 && "cursor-not-allowed",
-                  )}
-                  onClick={() => {
-                    step === 1 && setShowPassword(!showPassword);
-                  }}
-                >
-                  {showPassword ? (
-                    <EyeOpenIcon className="w-4 h-4" />
-                  ) : (
-                    <EyeClosedIcon className="w-4 h-4" />
-                  )}
-                </div>
-              </div>
             </div>
           </div>
 
