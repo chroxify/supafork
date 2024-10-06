@@ -26,7 +26,7 @@ export default function RootLayout({
       {process.env.NODE_ENV === "production" && (
           <Script
             src="https://cdn.seline.so/seline.js"
-            data-token="52947f744a8a4fa"
+            data-token="4ebea903a1d4d1c"
             async
           />
       )}
