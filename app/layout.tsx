@@ -7,6 +7,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Analytics } from "@vercel/analytics/react";
 import Image from "next/image";
+import Script from "next/script";
 
 export const metadata: Metadata = {
   title: "Supafork",
@@ -22,6 +23,13 @@ export default function RootLayout({
     <html lang="en">
       <Toaster closeButton />
       <Analytics />
+      {process.env.NODE_ENV === "production" && (
+          <Script
+            src="https://cdn.seline.so/seline.js"
+            data-token="52947f744a8a4fa"
+            async
+          />
+      )}
       <body
         className={cn(
           GeistSans.className,
